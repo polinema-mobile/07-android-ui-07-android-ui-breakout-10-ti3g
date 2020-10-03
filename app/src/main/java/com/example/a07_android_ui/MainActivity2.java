@@ -25,19 +25,4 @@ public class MainActivity2 extends AppCompatActivity {
         text3.setText(str3);
     }
 
-    public TextView getText1() {
-        return text1;
-    }
-
-    public TextView getText2() {
-        return text2;
-    }
-
-    public TextView getText3() {
-        return text3;
-    }
-
-    public TextView getText4() {
-        return text4;
-    }
 }
