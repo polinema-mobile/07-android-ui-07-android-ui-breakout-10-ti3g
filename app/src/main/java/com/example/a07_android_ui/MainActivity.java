@@ -8,6 +8,8 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -19,12 +21,25 @@ import java.util.Calendar;
 
 import static android.icu.lang.UCharacter.JoiningType.TRANSPARENT;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Parcelable {
     public static final String TAG="MainActivity";
     private EditText mDisplayData;
-    private Button savebtn;
+    private Button savebtn, savebtn2;
     private EditText text1, text2, text3;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
+
+    public static final Creator<MainActivity> CREATOR = new Creator<MainActivity>() {
+        @Override
+        public MainActivity createFromParcel(Parcel in) {
+            return new MainActivity(in);
+        }
+
+        @Override
+        public MainActivity[] newArray(int size) {
+            return new MainActivity[size];
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         };
 
         MainActivity2 main2 = new MainActivity2();
-        savebtn = findViewById(R.id.save);
+        savebtn = findViewById(R.id.saveintent);
         text1 = findViewById(R.id.name);
         text2 = findViewById(R.id.nim);
         text3 = findViewById(R.id.date);
@@ -74,7 +89,21 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        savebtn2 = findViewById(R.id.saveparcelable);
+
     }
 
+    protected MainActivity(Parcel in) {
+        
+    }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+    }
 }
