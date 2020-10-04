@@ -91,11 +91,71 @@ public class MainActivity extends AppCompatActivity implements Parcelable {
         });
 
         savebtn2 = findViewById(R.id.saveparcelable);
-
+        savebtn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentparcel = new Intent(MainActivity.this, MainActivity2.class);
+                intentparcel.putExtra("text1", new MainActivity(text1.getText().toString(),"1","1","1"));
+                intentparcel.putExtra("text2", new MainActivity(text2.getText().toString(), "2","2","2"));
+                intentparcel.putExtra("text3", new MainActivity(text3.getText().toString(),"3","3","3"));
+                startActivity(intentparcel);
+        Bundle bundle = getIntent().getExtras();
+        MainActivity main = (MainActivity) bundle.getParcelable("text1");
+            }
+        });
     }
 
-    protected MainActivity(Parcel in) {
-        
+//    ==================================Parcelable==================================
+
+    String mDisplayData2, text1s, text2s, text3s;
+    public void setText1s(String text1s) {
+        this.text1s = text1s;
+    }
+
+    public void setText2s(String text2s) {
+        this.text2s = text2s;
+    }
+
+    public void setText3s(String text3s) {
+        this.text3s = text3s;
+    }
+
+    public String getText1s() {
+        return text1s;
+    }
+
+    public String getText2s() {
+        return text2s;
+    }
+
+    public String getText3s() {
+        return text3s;
+    }
+
+    public void setmDisplayData2(String mDisplayData2) {
+        this.mDisplayData2 = mDisplayData2;
+    }
+
+    public String getmDisplayData2() {
+        return mDisplayData2;
+    }
+
+    public MainActivity(String mDisplayData2, String text1s, String text2s, String text3s){
+        this.mDisplayData2 = mDisplayData2;
+        this.text1s = text1s;
+        this.text2s = text2s;
+        this.text3s = text3s;
+    }
+
+    public MainActivity(Parcel in) {
+        mDisplayData2 = in.readString();
+        text1s = in.readString();
+        text2s = in.readString();
+        text3s = in.readString();
+    }
+
+    public MainActivity(){
+
     }
 
     @Override
@@ -105,5 +165,10 @@ public class MainActivity extends AppCompatActivity implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(mDisplayData2);
+        parcel.writeString(text1s);
+        parcel.writeString(text2s);
+        parcel.writeString(text3s);
     }
+
 }
